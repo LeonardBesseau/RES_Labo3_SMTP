@@ -33,16 +33,16 @@ public class Prank {
         return targets;
     }
 
-    public void addTarget(Person person){
-        targets.add(person);
+    public void addTarget(List<Person> person){
+        targets.addAll(person);
     }
 
     public List<Person> getCopy() {
         return copy;
     }
 
-    public void addCopy(Person person){
-        targets.add(person);
+    public void addCopy(List<Person> person){
+        targets.addAll(person);
     }
 
     public String getMessage() {
