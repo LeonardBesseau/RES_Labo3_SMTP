@@ -57,9 +57,9 @@ public class Prank {
         Message msg = new Message();
 
         msg.setContent(message+"\r\n");
-        msg.setTo(targets.stream().map(Person::getAddress).collect(Collectors.toList()).toArray(new String[]{}));
-        msg.setBcc(copy.stream().map(Person::getAddress).collect(Collectors.toList()).toArray(new String[]{}));
-        msg.setFrom(sender.getAddress());
+        msg.setTo(targets.stream().map(Person::getEmail).collect(Collectors.toList()).toArray(new String[]{}));
+        msg.setBcc(copy.stream().map(Person::getEmail).collect(Collectors.toList()).toArray(new String[]{}));
+        msg.setFrom(sender.getEmail());
 
         return msg;
     }
