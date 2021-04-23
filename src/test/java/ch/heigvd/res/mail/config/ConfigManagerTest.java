@@ -14,7 +14,7 @@ public class ConfigManagerTest {
     public void missingServerNameInPropertiesShouldThrow() {
         System.out.println(new File(".").getAbsolutePath());
         Exception exception = assertThrows(RuntimeException.class, () -> {
-            ConfigManager configManager = new ConfigManager("./test_files/properties_missing/missing_server");
+            ConfigManager configManager = new ConfigManager("./test_files/properties/missing_server");
         });
         assertEquals(exception.getMessage(), "Mail server cannot be empty");
     }
@@ -22,7 +22,7 @@ public class ConfigManagerTest {
     @Test
     public void missingServerPortInPropertiesShouldThrow() {
         Exception exception = assertThrows(RuntimeException.class, () -> {
-            ConfigManager configManager = new ConfigManager("./test_files/properties_missing/missing_port");
+            ConfigManager configManager = new ConfigManager("./test_files/properties/missing_port");
         });
 
     }
@@ -30,7 +30,7 @@ public class ConfigManagerTest {
     @Test
     public void missingGroupNumberInPropertiesShouldThrow() {
         Exception exception = assertThrows(RuntimeException.class, () -> {
-            ConfigManager configManager = new ConfigManager("./test_files/properties_missing/missing_group_number");
+            ConfigManager configManager = new ConfigManager("./test_files/properties/missing_group_number");
         });
 
         assertEquals(exception.getMessage(), "The number of group must be a number and non-empty");
@@ -39,13 +39,13 @@ public class ConfigManagerTest {
     @Test
     public void missingBCCInPropertiesShouldNotThrow() {
         assertDoesNotThrow(() -> {
-            ConfigManager configManager = new ConfigManager("./test_files/properties_missing/missing_bcc");
+            ConfigManager configManager = new ConfigManager("./test_files/properties/missing_bcc");
         });
     }
     @Test
     public void wrongEmailInBccShouldThrow() {
         Exception exception = assertThrows(RuntimeException.class, () -> {
-            ConfigManager configManager = new ConfigManager("./test_files/properties_missing/wrong_bcc");
+            ConfigManager configManager = new ConfigManager("./test_files/properties/wrong_bcc");
         });
 
         assertEquals(exception.getMessage(), "Email in Bcc must be valid");
@@ -56,7 +56,7 @@ public class ConfigManagerTest {
     @Test
     public void wrongPortShouldThrow() {
         Exception exception = assertThrows(RuntimeException.class, () -> {
-            ConfigManager configManager = new ConfigManager("./test_files/properties_missing/wrong_port");
+            ConfigManager configManager = new ConfigManager("./test_files/properties/wrong_port");
         });
 
         assertEquals(exception.getMessage(), "Port number must be between 1 and 65535. Careful port 1-1000 need admin privileges");
@@ -65,16 +65,42 @@ public class ConfigManagerTest {
     @Test
     public void wrongGroupNumberShouldThrow() {
         Exception exception = assertThrows(RuntimeException.class, () -> {
-            ConfigManager configManager = new ConfigManager("./test_files/properties_missing/wrong_group");
+            ConfigManager configManager = new ConfigManager("./test_files/properties/wrong_group");
         });
 
         assertEquals(exception.getMessage(), "The number of group should be greater than 0");
     }
 
     @Test
+    public void missingFilesShouldThrows() {
+        Exception exception = assertThrows(java.io.FileNotFoundException.class, () -> {
+            ConfigManager configManager = new ConfigManager("./test_files/properties/nothing");
+        });
+    }
+
+    @Test
+    public void missingMessageShouldThrows() {
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            ConfigManager configManager = new ConfigManager("./test_files/messages/message");
+        });
+
+        assertEquals(exception.getMessage(), "Need at least one message");
+    }
+
+    @Test
+    public void missingVictimsShouldThrows() {
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            ConfigManager configManager = new ConfigManager("./test_files/messages/victims");
+        });
+
+
+        assertEquals(exception.getMessage(), "Need at least 3 person to target");
+    }
+
+    @Test
     public void configShouldWorkWhenParamAreValid() {
         assertDoesNotThrow(() -> {
-            ConfigManager configManager = new ConfigManager("./test_files/properties_missing/correct");
+            ConfigManager configManager = new ConfigManager("./test_files/properties/correct");
         });
     }
 }

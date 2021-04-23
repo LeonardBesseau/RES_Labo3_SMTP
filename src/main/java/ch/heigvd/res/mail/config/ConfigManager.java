@@ -76,11 +76,14 @@ public class ConfigManager {
             try (BufferedReader reader = new BufferedReader(isr)) {
                 result = new ArrayList<>();
                 String address = reader.readLine();
-                while (address != null) {
+                while (address != null && !address.isEmpty()) {
                     result.add(new Person(address));
                     address = reader.readLine();
                 }
             }
+        }
+        if(result.size() < 3){
+            throw new RuntimeException("Need at least 3 person to target");
         }
         return result;
     }
@@ -103,6 +106,9 @@ public class ConfigManager {
                     line = reader.readLine();
                 }
             }
+        }
+        if(result.isEmpty()){
+            throw new RuntimeException("Need at least one message");
         }
         return result;
     }

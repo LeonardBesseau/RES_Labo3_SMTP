@@ -14,6 +14,9 @@ public class Mail {
         ConfigManager configManager = null;
         try {
             configManager = new ConfigManager("./config/");
+        }catch (java.io.FileNotFoundException e){
+            System.err.println("Missing Files. See documentation for how to use the prank generator");
+            System.exit(1);
         }catch (RuntimeException e){
             System.err.println(e.getMessage());
             System.exit(1);
