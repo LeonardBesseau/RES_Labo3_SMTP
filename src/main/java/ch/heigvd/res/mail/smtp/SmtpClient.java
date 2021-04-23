@@ -6,8 +6,8 @@ import java.io.*;
 import java.net.Socket;
 
 public class SmtpClient {
-    private String smtpServerAddress;
-    private int serverPort = 25;
+    private final String smtpServerAddress;
+    private int serverPort;
 
 
     public SmtpClient(String smtpServerAddress, int serverPort) {
@@ -16,21 +16,17 @@ public class SmtpClient {
     }
 
     public void sendMessage(Message message) throws IOException {
-        System.out.println("Sending message");
         Socket socket = new Socket(smtpServerAddress, serverPort);
         PrintWriter writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"), true);
         BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
         String line = reader.readLine();
-        System.out.println(line);
         writer.printf("EHLO localhost\r\n");
         line = reader.readLine();
-        System.out.println(line);
         if (!line.startsWith("250")) {
             throw new IOException("SMTP error: " + line);
         }
         while (line.startsWith("250-")) {
             line = reader.readLine();
-            System.out.println(line);
         }
 
         writer.write("MAIL FROM:");
@@ -38,37 +34,22 @@ public class SmtpClient {
         writer.write("\r\n");
         writer.flush();
         line = reader.readLine();
-        System.out.println(line);
 
         for (String to : message.getTo()) {
-            System.out.println(to);
             writer.write("RCPT TO:<");
             writer.write(to);
             writer.write(">\r\n");
             writer.flush();
             line = reader.readLine();
-            System.out.println(line);
         }
-
-        for (String cc : message.getCc()) {
-            writer.write("RCPT TO:");
-            writer.write(cc);
-            writer.write("\r\n");
-            writer.flush();
-            line = reader.readLine();
-            System.out.println(line);
-        }
-
 
         for (String bcc : message.getBcc()) {
-            System.out.println(bcc);
             writer.write("RCPT TO:");
             writer.write(bcc);
             writer.write("\r\n");
             writer.flush();
             line = reader.readLine();
         }
-
 
         writer.write("DATA");
         writer.write("\r\n");
@@ -79,23 +60,13 @@ public class SmtpClient {
 
         writer.write("To: " + message.getTo()[0] + " ");
         for (int i = 1; i < message.getTo().length; i++) {
-            System.out.println(i + " " + message.getTo()[i]);
             writer.write(", " + message.getTo()[i]);
         }
 
         writer.write("\r\n");
-        if(message.getCc().length > 0){
-            writer.write("Cc: " + message.getCc()[0] + " ");
-            for (int i = 1; i < message.getCc().length; i++) {
-                writer.write(", " + message.getCc()[i]);
-            }
-            writer.write("\r\n");
-        }
-        
-
 
         writer.flush();
-        writer.write(message.getBody());
+        writer.write(message.getContent());
         writer.write("\r\n");
         writer.write(".");
         writer.write("\r\n");

@@ -3,16 +3,12 @@ package ch.heigvd.res.mail.model.mail;
 public class Message {
     private String from;
     private String[] to;
-    private String[] cc;
     private String[] bcc;
-    private String subject;
-    private String body;
+    private String content;
 
     public Message(){
         to = new String[0];
-        cc = new String[0];
         bcc = new String[0];
-
     }
 
     public String getFrom() {
@@ -31,14 +27,6 @@ public class Message {
         this.to = to;
     }
 
-    public String[] getCc() {
-        return cc;
-    }
-
-    public void setCc(String[] cc) {
-        this.cc = cc;
-    }
-
     public String[] getBcc() {
         return bcc;
     }
@@ -47,19 +35,11 @@ public class Message {
         this.bcc = bcc;
     }
 
-    public String getSubject() {
-        return subject;
+    public String getContent() {
+        return content;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
+    public void setContent(String content) {
+        this.content = content;
     }
 }
