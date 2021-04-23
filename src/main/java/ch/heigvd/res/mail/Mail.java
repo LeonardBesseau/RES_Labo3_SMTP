@@ -11,7 +11,13 @@ public class Mail {
 
     public static void main(String[] args) throws IOException {
 
-        ConfigManager configManager = new ConfigManager("./config/");
+        ConfigManager configManager = null;
+        try {
+            configManager = new ConfigManager("./config/");
+        }catch (RuntimeException e){
+            System.err.println(e.getMessage());
+            System.exit(1);
+        }
         PrankGenerator prankGenerator = new PrankGenerator(configManager);
         SmtpClient smtpClient= new SmtpClient(configManager.getSmtpServerAddress(), configManager.getServerPort());
         for (Prank prank : prankGenerator.generatePranks()) {
