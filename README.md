@@ -27,7 +27,7 @@ Après avoir configuré votre conteneur Docker, il ne vous reste plus qu'à lanc
 
 Pour cela vous pouvez simplement taper la commande `java -jar MockMock-1.4.0.one-jar.jar`, cela va démarrer le faux serveur avec les options par défaut (**port SMTP : 25** et **port HTTP : 8282**). 
 
-Sinon pour modifier ces options vous pouvez le faire ainsi : `java -jar MockMock.jar -p 25000 -h 8080` (ici **port SMTP : 25000** et **port HTTP : 8080**)
+Sinon pour modifier ces options vous pouvez le faire ainsi : `java -jar MockMock-1.4.0.one-jar.jar -p 25000 -h 8080` (ici **port SMTP : 25000** et **port HTTP : 8080**)
 
 Une fois le serveur démarré, vous pourrez consulter les mails qu'il a reçu en tapant `localhost:<port>` dans votre navigateur : 
 
