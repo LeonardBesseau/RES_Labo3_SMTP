@@ -42,7 +42,7 @@ public class Prank {
     }
 
     public void addCopy(List<Person> person){
-        targets.addAll(person);
+        copy.addAll(person);
     }
 
     public String getMessage() {
@@ -58,7 +58,7 @@ public class Prank {
 
         msg.setBody(message+"\r\n");
         msg.setTo(targets.stream().map(Person::getAddress).collect(Collectors.toList()).toArray(new String[]{}));
-        msg.setCc(copy.stream().map(Person::getAddress).collect(Collectors.toList()).toArray(new String[]{}));
+        msg.setBcc(copy.stream().map(Person::getAddress).collect(Collectors.toList()).toArray(new String[]{}));
         msg.setFrom(sender.getAddress());
 
         return msg;

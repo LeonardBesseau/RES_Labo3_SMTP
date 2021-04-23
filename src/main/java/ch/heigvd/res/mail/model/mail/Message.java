@@ -8,6 +8,13 @@ public class Message {
     private String subject;
     private String body;
 
+    public Message(){
+        to = new String[0];
+        cc = new String[0];
+        bcc = new String[0];
+
+    }
+
     public String getFrom() {
         return from;
     }

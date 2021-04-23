@@ -20,6 +20,7 @@ public class PrankGenerator {
         List<Prank> pranks = new ArrayList<>();
 
         List<String> messages = configManager.getMessages();
+        Collections.shuffle(messages);
         int index = 0;
 
         int nbGroup = configManager.getNbGroups();
