@@ -40,7 +40,7 @@ public class ConfigManager {
         } catch (NumberFormatException e) {
             throw new RuntimeException("Server port must be a number and non-empty");
         }
-        if(serverPort <= 0 || serverPort >= 65535){
+        if (serverPort <= 0 || serverPort >= 65535) {
             throw new RuntimeException("Port number must be between 1 and 65535. Careful port 1-1000 need admin privileges");
         }
 
@@ -49,7 +49,7 @@ public class ConfigManager {
         } catch (NumberFormatException e) {
             throw new RuntimeException("The number of group must be a number and non-empty");
         }
-        if(nbGroups <= 0){
+        if (nbGroups <= 0) {
             throw new RuntimeException("The number of group should be greater than 0");
         }
 
@@ -57,7 +57,7 @@ public class ConfigManager {
         String cc = properties.getProperty("BCC");
         String[] ccAddresses = cc.split(",");
         for (String email : ccAddresses) {
-            if(email.isEmpty()){
+            if (email.isEmpty()) {
                 continue;
             }
             if (EmailValidator.getInstance().isValid(email)) {
@@ -82,7 +82,7 @@ public class ConfigManager {
                 }
             }
         }
-        if(result.size() < 3){
+        if (result.size() < 3) {
             throw new RuntimeException("Need at least 3 person to target");
         }
         return result;
@@ -107,7 +107,7 @@ public class ConfigManager {
                 }
             }
         }
-        if(result.isEmpty()){
+        if (result.isEmpty()) {
             throw new RuntimeException("Need at least one message");
         }
         return result;

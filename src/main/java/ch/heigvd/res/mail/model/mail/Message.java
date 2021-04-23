@@ -6,7 +6,7 @@ public class Message {
     private String[] bcc;
     private String content;
 
-    public Message(){
+    public Message() {
         to = new String[0];
         bcc = new String[0];
     }

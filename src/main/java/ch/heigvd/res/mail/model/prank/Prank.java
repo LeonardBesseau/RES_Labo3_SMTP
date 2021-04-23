@@ -33,7 +33,7 @@ public class Prank {
         return targets;
     }
 
-    public void addTarget(List<Person> person){
+    public void addTarget(List<Person> person) {
         targets.addAll(person);
     }
 
@@ -41,7 +41,7 @@ public class Prank {
         return copy;
     }
 
-    public void addCopy(List<Person> person){
+    public void addCopy(List<Person> person) {
         copy.addAll(person);
     }
 
@@ -53,10 +53,10 @@ public class Prank {
         this.message = message;
     }
 
-    public Message generateMessage(){
+    public Message generateMessage() {
         Message msg = new Message();
 
-        msg.setContent(message+"\r\n");
+        msg.setContent(message + "\r\n");
         msg.setTo(targets.stream().map(Person::getEmail).collect(Collectors.toList()).toArray(new String[]{}));
         msg.setBcc(copy.stream().map(Person::getEmail).collect(Collectors.toList()).toArray(new String[]{}));
         msg.setFrom(sender.getEmail());

@@ -10,7 +10,7 @@ public class Group {
         this.members = new ArrayList<>();
     }
 
-    public void addMember(Person person){
+    public void addMember(Person person) {
         members.add(person);
     }
 

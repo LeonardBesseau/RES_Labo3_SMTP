@@ -10,7 +10,7 @@ import java.util.List;
 
 public class PrankGenerator {
 
-    private ConfigManager configManager;
+    private final ConfigManager configManager;
 
     public PrankGenerator(ConfigManager configManager) {
         this.configManager = configManager;
@@ -61,7 +61,7 @@ public class PrankGenerator {
         }
         int turn = 0;
         Group targetGroup;
-        while (availableTargets.size() > 0){
+        while (availableTargets.size() > 0) {
             targetGroup = groups.get(turn);
             turn = (turn + 1) % groups.size();
             Person target = availableTargets.remove(0);

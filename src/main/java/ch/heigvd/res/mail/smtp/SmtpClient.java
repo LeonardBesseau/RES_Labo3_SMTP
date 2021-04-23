@@ -7,7 +7,7 @@ import java.net.Socket;
 
 public class SmtpClient {
     private final String smtpServerAddress;
-    private int serverPort;
+    private final int serverPort;
 
 
     public SmtpClient(String smtpServerAddress, int serverPort) {
@@ -41,6 +41,7 @@ public class SmtpClient {
             writer.write(">\r\n");
             writer.flush();
             line = reader.readLine();
+            // TODO check if RCPT is accepted
         }
 
         for (String bcc : message.getBcc()) {
@@ -49,6 +50,7 @@ public class SmtpClient {
             writer.write("\r\n");
             writer.flush();
             line = reader.readLine();
+            // TODO check if RCPT is accepted
         }
 
         writer.write("DATA");

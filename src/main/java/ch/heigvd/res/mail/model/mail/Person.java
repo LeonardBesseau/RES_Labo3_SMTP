@@ -6,6 +6,7 @@ public class Person {
     public Person(String email) {
         this.email = email;
     }
+
     public String getEmail() {
         return email;
     }
