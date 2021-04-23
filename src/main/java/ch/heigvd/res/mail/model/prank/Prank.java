@@ -56,7 +56,7 @@ public class Prank {
     public Message generateMessage(){
         Message msg = new Message();
 
-        msg.setBody(message+"\r\n"+sender.getFirstName());
+        msg.setBody(message+"\r\n");
         msg.setTo(targets.stream().map(Person::getAddress).collect(Collectors.toList()).toArray(new String[]{}));
         msg.setCc(copy.stream().map(Person::getAddress).collect(Collectors.toList()).toArray(new String[]{}));
         msg.setFrom(sender.getAddress());

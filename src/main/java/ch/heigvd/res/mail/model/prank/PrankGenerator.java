@@ -1,6 +1,6 @@
 package ch.heigvd.res.mail.model.prank;
 
-import ch.heigvd.res.mail.config.IConfigManager;
+import ch.heigvd.res.mail.config.ConfigManager;
 import ch.heigvd.res.mail.model.mail.Group;
 import ch.heigvd.res.mail.model.mail.Person;
 
@@ -10,9 +10,9 @@ import java.util.List;
 
 public class PrankGenerator {
 
-    private IConfigManager configManager;
+    private ConfigManager configManager;
 
-    public PrankGenerator(IConfigManager configManager) {
+    public PrankGenerator(ConfigManager configManager) {
         this.configManager = configManager;
     }
 

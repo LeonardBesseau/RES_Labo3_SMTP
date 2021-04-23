@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class ConfigManager implements IConfigManager {
+public class ConfigManager {
     private String smtpServerAddress;
     private int serverPort;
     private final List<Person> targets;
@@ -35,10 +35,13 @@ public class ConfigManager implements IConfigManager {
 
         copy = new ArrayList<>();
         String cc = properties.getProperty("witnessToCC");
-        String[] ccAddresses = cc.split(",");
-        for (String address : ccAddresses) {
-            copy.add(new Person(address));
+        if(cc != null){
+            String[] ccAddresses = cc.split(",");
+            for (String address : ccAddresses) {
+                copy.add(new Person(address));
+            }
         }
+
 
     }
 
@@ -66,7 +69,7 @@ public class ConfigManager implements IConfigManager {
                 String line = reader.readLine();
                 while (line != null){
                     StringBuilder body = new StringBuilder();
-                    while ((line != null) && (!line.equals("=="))){
+                    while ((line != null) && (!line.equals("___"))){
                         body.append(line);
                         body.append("\r\n");
                         line = reader.readLine();
@@ -79,32 +82,32 @@ public class ConfigManager implements IConfigManager {
         return result;
     }
 
-    @Override
+
     public List<Person> getTargets() {
         return targets;
     }
 
-    @Override
+
     public List<String> getMessages() {
         return messages;
     }
 
-    @Override
+
     public String getSmtpServerAddress() {
         return smtpServerAddress;
     }
 
-    @Override
+
     public int getServerPort() {
         return serverPort;
     }
 
-    @Override
+
     public int getNbGroups() {
         return nbGroups;
     }
 
-    @Override
+
     public List<Person> getCopy() {
         return copy;
     }

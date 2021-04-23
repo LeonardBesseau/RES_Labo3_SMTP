@@ -5,7 +5,7 @@ import ch.heigvd.res.mail.model.mail.Message;
 import java.io.*;
 import java.net.Socket;
 
-public class SmtpClient implements ISmtpClient {
+public class SmtpClient{
     private String smtpServerAddress;
     private int serverPort = 25;
 
@@ -15,33 +15,39 @@ public class SmtpClient implements ISmtpClient {
         this.serverPort = serverPort;
     }
 
-    @Override
     public void sendMessage(Message message) throws IOException {
+        System.out.println("Sending message");
         Socket socket = new Socket(smtpServerAddress, serverPort);
         PrintWriter writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"), true);
         BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
         String line = reader.readLine();
+        System.out.println(line);
         writer.printf("EHLO localhost\r\n");
         line = reader.readLine();
+        System.out.println(line);
         if (!line.startsWith("250")) {
             throw new IOException("SMTP error: " + line);
         }
         while (line.startsWith("250-")) {
             line = reader.readLine();
+            System.out.println(line);
         }
 
-        writer.write("MAIL FROM");
+        writer.write("MAIL FROM:");
         writer.write(message.getFrom());
         writer.write("\r\n");
         writer.flush();
         line = reader.readLine();
+        System.out.println(line);
 
         for (String to : message.getTo()) {
+            System.out.println(to);
             writer.write("RCPT TO:");
             writer.write(to);
             writer.write("\r\n");
             writer.flush();
             line = reader.readLine();
+            System.out.println(line);
         }
 
         for (String cc : message.getCc()) {
@@ -50,15 +56,19 @@ public class SmtpClient implements ISmtpClient {
             writer.write("\r\n");
             writer.flush();
             line = reader.readLine();
+            System.out.println(line);
         }
 
-        for (String bcc : message.getBcc()) {
-            writer.write("RCPT TO:");
-            writer.write(bcc);
-            writer.write("\r\n");
-            writer.flush();
-            line = reader.readLine();
+        if(message.getBcc() != null){
+            for (String bcc : message.getBcc()) {
+                writer.write("RCPT TO:");
+                writer.write(bcc);
+                writer.write("\r\n");
+                writer.flush();
+                line = reader.readLine();
+            }
         }
+
 
         writer.write("DATA");
         writer.write("\r\n");
@@ -72,11 +82,14 @@ public class SmtpClient implements ISmtpClient {
             writer.write(", "+message.getTo()[i]);
         }
         writer.write("\r\n");
-        writer.write("Cc: " + message.getCc()[0] + "\r\n");
-        for (int i = 1; i < message.getCc().length;i++){
-            writer.write(", "+message.getCc()[i]);
+        if(message.getCc() != null && message.getCc().length > 0){
+            writer.write("Cc: " + message.getCc()[0] + "\r\n");
+            for (int i = 1; i < message.getCc().length;i++){
+                writer.write(", "+message.getCc()[i]);
+            }
+            writer.write("\r\n");
         }
-        writer.write("\r\n");
+
 
         writer.flush();
         writer.write(message.getBody());
@@ -86,5 +99,7 @@ public class SmtpClient implements ISmtpClient {
         writer.flush();
         line = reader.readLine();
         writer.write("QUIT\r\n");
+        writer.flush();
+        socket.close();
     }
 }
