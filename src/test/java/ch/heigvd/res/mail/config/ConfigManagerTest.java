@@ -9,6 +9,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+// Class of unit tests to validate the operation of the ConfigManager
 public class ConfigManagerTest {
     @Test
     public void missingServerNameInPropertiesShouldThrow() {
@@ -59,7 +60,7 @@ public class ConfigManagerTest {
             ConfigManager configManager = new ConfigManager("./test_files/properties/wrong_port");
         });
 
-        assertEquals(exception.getMessage(), "Port number must be between 1 and 65535. Careful port 1-1000 need admin privileges");
+        assertEquals(exception.getMessage(), "Port number must be between 1 and 65535. Careful port 1-1024 need admin privileges");
     }
 
     @Test

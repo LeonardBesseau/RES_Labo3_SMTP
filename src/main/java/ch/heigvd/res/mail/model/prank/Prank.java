@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+// Class representing a prank
 public class Prank {
 
     private Person sender;
@@ -14,6 +15,9 @@ public class Prank {
     private final List<Person> copy;
     private String message;
 
+    /**
+     * Constructor of the class Prank
+     */
     public Prank() {
         sender = null;
         targets = new ArrayList<>();
@@ -25,6 +29,10 @@ public class Prank {
         return sender;
     }
 
+    /**
+     * Setter for the sender
+     * @param sender Person representing the sender
+     */
     public void setSender(Person sender) {
         this.sender = sender;
     }
@@ -33,6 +41,10 @@ public class Prank {
         return targets;
     }
 
+    /**
+     * Method to fill the targets
+     * @param person list of targets
+     */
     public void addTarget(List<Person> person) {
         targets.addAll(person);
     }
@@ -41,6 +53,10 @@ public class Prank {
         return copy;
     }
 
+    /**
+     * Method to fill the people in blind copy
+     * @param person list of Person in blind copy
+     */
     public void addCopy(List<Person> person) {
         copy.addAll(person);
     }
@@ -49,10 +65,18 @@ public class Prank {
         return message;
     }
 
+    /**
+     * Setter for the message
+     * @param message message that will be used in the prank
+     */
     public void setMessage(String message) {
         this.message = message;
     }
 
+    /**
+     * Method that will generate a Message with all the information gathered
+     * @return Message object that will be sent
+     */
     public Message generateMessage() {
         Message msg = new Message();
 
