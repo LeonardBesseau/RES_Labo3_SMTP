@@ -1,0 +1,1 @@
+docker run oliechti/teaching-docker-simplejavaserver
