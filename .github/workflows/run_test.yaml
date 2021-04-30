@@ -14,6 +14,8 @@ jobs:
       - name: Install the dependencies
         working-directory: .
         run: mvn clean install -DskipTests=true
+      - name: test
+        run: ls -l
       - name: Run the tests
         working-directory: .
         run: mvn test
