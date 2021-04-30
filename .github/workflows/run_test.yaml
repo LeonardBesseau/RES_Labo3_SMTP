@@ -17,5 +17,4 @@ jobs:
       - name: test
         run: ls -l
       - name: Run the tests
-        working-directory: .
         run: mvn test
