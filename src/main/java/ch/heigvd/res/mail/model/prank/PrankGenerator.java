@@ -15,6 +15,7 @@ public class PrankGenerator {
 
     /**
      * Constructor of the class PrankGenerator
+     *
      * @param configManager configuration manager
      */
     public PrankGenerator(ConfigManager configManager) {
@@ -23,6 +24,7 @@ public class PrankGenerator {
 
     /**
      * Method that will choose pranks from messages in the configManager and that will assign them to random groups
+     *
      * @return list of pranks
      */
     public List<Prank> generatePranks() {
@@ -34,13 +36,7 @@ public class PrankGenerator {
         int index = 0;
 
         int nbGroup = configManager.getNbGroups();
-        int nbTargets = configManager.getTargets().size();
 
-
-        if (nbTargets / nbGroup < 3) {
-            nbGroup = nbTargets / 3;
-            System.err.printf("Not enough targets to generate enough groups. Continue using %d groups", nbGroup);
-        }
 
         List<Group> groups = generateGroups(configManager.getTargets(), nbGroup);
 
@@ -65,11 +61,17 @@ public class PrankGenerator {
 
     /**
      * Method that will generate groups of victims
+     *
      * @param targets list of victims addresses
      * @param nbGroup number of victims groups
      * @return list of groups
      */
     public List<Group> generateGroups(List<Person> targets, int nbGroup) {
+        if (targets.size() / nbGroup < 3) {
+            nbGroup = targets.size() / 3;
+            System.err.printf("Not enough targets to generate enough groups. Continue using %d groups", nbGroup);
+        }
+
         List<Person> availableTargets = new ArrayList<>(targets);
         Collections.shuffle(availableTargets);
         List<Group> groups = new ArrayList<>();

@@ -2,6 +2,7 @@ package ch.heigvd.res.mail.model.prank;
 
 import ch.heigvd.res.mail.model.mail.Message;
 import ch.heigvd.res.mail.model.mail.Person;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +11,11 @@ import java.util.stream.Collectors;
 // Class representing a prank
 public class Prank {
 
+    @Setter
     private Person sender;
     private final List<Person> targets;
     private final List<Person> copy;
+    @Setter
     private String message;
 
     /**
@@ -25,22 +28,6 @@ public class Prank {
         message = null;
     }
 
-    public Person getSender() {
-        return sender;
-    }
-
-    /**
-     * Setter for the sender
-     * @param sender Person representing the sender
-     */
-    public void setSender(Person sender) {
-        this.sender = sender;
-    }
-
-    public List<Person> getTargets() {
-        return targets;
-    }
-
     /**
      * Method to fill the targets
      * @param person list of targets
@@ -49,28 +36,12 @@ public class Prank {
         targets.addAll(person);
     }
 
-    public List<Person> getCopy() {
-        return copy;
-    }
-
     /**
      * Method to fill the people in blind copy
      * @param person list of Person in blind copy
      */
     public void addCopy(List<Person> person) {
         copy.addAll(person);
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    /**
-     * Setter for the message
-     * @param message message that will be used in the prank
-     */
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     /**
