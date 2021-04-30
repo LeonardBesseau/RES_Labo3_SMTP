@@ -1,7 +1,5 @@
 name: Pull request workflow
-on: 
-  push:
-      - master
+on: [push]
 
 jobs:
   unit-test:
