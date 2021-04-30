@@ -15,6 +15,6 @@ jobs:
         working-directory: .
         run: mvn clean install -DskipTests=true
       - name: test
-        run: ls -l
+        run: ls -l test_files
       - name: Run the tests
         run: mvn test
