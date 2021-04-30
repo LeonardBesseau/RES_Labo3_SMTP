@@ -23,23 +23,7 @@ public class Prank {
         targets = new ArrayList<>();
         copy = new ArrayList<>();
         message = null;
-    }
-
-    public Person getSender() {
-        return sender;
-    }
-
-    /**
-     * Setter for the sender
-     * @param sender Person representing the sender
-     */
-    public void setSender(Person sender) {
-        this.sender = sender;
-    }
-
-    public List<Person> getTargets() {
-        return targets;
-    }
+    }*/
 
     /**
      * Method to fill the targets
@@ -49,28 +33,12 @@ public class Prank {
         targets.addAll(person);
     }
 
-    public List<Person> getCopy() {
-        return copy;
-    }
-
     /**
      * Method to fill the people in blind copy
      * @param person list of Person in blind copy
      */
     public void addCopy(List<Person> person) {
         copy.addAll(person);
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    /**
-     * Setter for the message
-     * @param message message that will be used in the prank
-     */
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     /**
