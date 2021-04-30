@@ -28,7 +28,7 @@ public class SmtpClient {
      *
      * @param message message to send
      */
-    public void sendMessage(Message message) throws IOException {
+    public void sendMessage(Message message) {
 
         try (Socket socket = new Socket(smtpServerAddress, serverPort);
              PrintWriter writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"));
